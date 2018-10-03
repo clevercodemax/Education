@@ -22,6 +22,11 @@ import java.util.List;
 public class XmlExample implements StudentOrderDataSource{
 
     @Override
+    public Long addStudentOrder(StudentOrder so) {
+        return null;
+    }
+
+    @Override
     public List<StudentOrder> getStudentOrders() {
         return null;
     }

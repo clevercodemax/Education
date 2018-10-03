@@ -27,11 +27,13 @@ public class ProcessStarter {
     public void processList() {
 
         StudentOrderDataSource ds = FactoryDataSource.getDataSource();
-        List<StudentOrder> orderList = ds.getStudentOrders();
+        ds.addStudentOrder(null);
 
-        for (StudentOrder so : orderList) {
-            processStudentOrder(so);
-        }
+        List<StudentOrder> orderList = ds.getStudentOrders();
+//
+//        for (StudentOrder so : orderList) {
+//            processStudentOrder(so);
+//        }
 
     }
 

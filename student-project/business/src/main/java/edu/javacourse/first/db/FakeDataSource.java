@@ -12,6 +12,11 @@ public class FakeDataSource implements StudentOrderDataSource {
     private static final int CHILD_COUNT = 2;
 
     @Override
+    public Long addStudentOrder(StudentOrder so) {
+        return null;
+    }
+
+    @Override
     public List<StudentOrder> getStudentOrders() {
         List<StudentOrder> result = new ArrayList<StudentOrder>(10);
         for (int i = 0; i < 1; i++) {
