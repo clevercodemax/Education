@@ -2,6 +2,7 @@ package edu.javacourse.first.domain;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -9,6 +10,8 @@ public class StudentOrder implements Serializable {
 
     @XmlAttribute(name = "so-id", required = true)
     private Long studentOrderId;
+    @XmlElement(name = "so-date", required = true)
+    private Date studentOrderDate;
     @XmlElement(name = "husband", required = true)
     private PersonAdult husband;
     @XmlElement(name = "wife", required = true)
@@ -20,10 +23,20 @@ public class StudentOrder implements Serializable {
     public StudentOrder() {
     }
 
-    public StudentOrder(PersonAdult husband, PersonAdult wife, List<PersonChild> children) {
+    public StudentOrder(Long studentOrderId, Date studentOrderDate, PersonAdult husband, PersonAdult wife, List<PersonChild> children) {
+        this.studentOrderId = studentOrderId;
+        this.studentOrderDate = studentOrderDate;
         this.husband = husband;
         this.wife = wife;
         this.children = children;
+    }
+
+    public Date getStudentOrderDate() {
+        return studentOrderDate;
+    }
+
+    public void setStudentOrderDate(Date studentOrderDate) {
+        this.studentOrderDate = studentOrderDate;
     }
 
     public Long getStudentOrderId() {

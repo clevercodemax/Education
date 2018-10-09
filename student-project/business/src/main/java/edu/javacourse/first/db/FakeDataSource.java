@@ -5,6 +5,7 @@ import edu.javacourse.first.domain.PersonChild;
 import edu.javacourse.first.domain.StudentOrder;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FakeDataSource implements StudentOrderDataSource {
@@ -38,7 +39,7 @@ public class FakeDataSource implements StudentOrderDataSource {
             c.setGivenName(cName + " " + i);
             children.add(c);
         }
-        StudentOrder so = new StudentOrder(h, w, children);
+        StudentOrder so = new StudentOrder(1L, new Date(), h, w, children);
         return so;
     }
 

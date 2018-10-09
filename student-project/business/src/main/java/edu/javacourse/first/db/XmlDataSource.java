@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class XmlDataSource implements StudentOrderDataSource{
+public class XmlDataSource implements StudentOrderDataSource {
 
     @Override
     public Long addStudentOrder(StudentOrder so) {
@@ -87,7 +87,7 @@ public class XmlDataSource implements StudentOrderDataSource{
                             }
                         }
                     }
-                    StudentOrder so = new StudentOrder(husband, wife, children);
+                    StudentOrder so = new StudentOrder(1L, new Date(), husband, wife, children);
                     soList.add(so);
                 }
 
