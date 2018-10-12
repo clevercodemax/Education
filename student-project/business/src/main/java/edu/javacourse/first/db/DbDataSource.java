@@ -1,9 +1,13 @@
 package edu.javacourse.first.db;
 
+import edu.javacourse.first.domain.Person;
+import edu.javacourse.first.domain.PersonAdult;
 import edu.javacourse.first.domain.PersonChild;
 import edu.javacourse.first.domain.StudentOrder;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DbDataSource implements StudentOrderDataSource {
@@ -17,6 +21,11 @@ public class DbDataSource implements StudentOrderDataSource {
     private static final String INSERT_CHILD = "INSERT INTO so_student_order_child (" +
             "student_order_id, c_surname, c_givenname, c_patronymic, c_date_of_birth, c_birth_document) " +
             "VALUES (?, ?, ?, ?, ?, ?)";
+
+    private static final String SELECT = "SELECT so.*, soc.* FROM so_student_order so " +
+            "INNER JOIN so_student_order_child soc " +
+            "ON soc.student_order_id = so.student_order_id " +
+            "ORDER BY so.student_order_id";
 
     static {
         try {
@@ -102,18 +111,34 @@ public class DbDataSource implements StudentOrderDataSource {
 
     @Override
     public List<StudentOrder> getStudentOrders() {
+        List<StudentOrder> result = new LinkedList<>();
         try (Connection con = getConnection()) {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             try {
-                stmt = con.prepareStatement("select * from st_group");
+                int soId = -1;
+                StudentOrder so = null;
+                List<PersonChild> children = null;
+                stmt = con.prepareStatement(SELECT);
                 rs = stmt.executeQuery();
                 while (rs.next()) {
-                    long groupId = rs.getLong("group_id");
-                    String groupName = rs.getString("groupName");
-                    String curator = rs.getString("curator");
-                    String speciality = rs.getString("speciality");
-                    System.out.println(groupId + ":" + groupName + ":" + curator + ":" + speciality);
+                    int id = rs.getInt("student_order_id");
+                    if (id != soId) {
+                        so = new StudentOrder();
+                        so.setStudentOrderId(new Long(id));
+                        PersonAdult h = getAdult(rs, "h");
+                        PersonAdult w = getAdult(rs, "w");
+                        so.setHusband(h);
+                        so.setWife(w);
+                        children = new LinkedList<>();
+                        children.add(getChild(rs));
+                        so.setChildren(children);
+                        soId = id;
+                        result.add(so);
+                    } else {
+                        so.getChildren().add(getChild(rs));
+                    }
+
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -124,7 +149,30 @@ public class DbDataSource implements StudentOrderDataSource {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
+    }
+
+    private PersonAdult getAdult(ResultSet rs, String prefix) throws SQLException {
+        PersonAdult p = new PersonAdult();
+        p.setSurName(rs.getString(prefix + "_surname"));
+        p.setGivenName(rs.getString(prefix + "_givenname"));
+        p.setPatronymic(rs.getString(prefix + "_patronymic"));
+        p.setDateOfBirth(new java.util.Date(rs.getDate(prefix + "_date_of_birth").getTime()));
+        p.setPassportSeria(rs.getString(prefix + "_passport_seria"));
+        p.setPassportNumber(rs.getString(prefix + "_passport_number"));
+        p.setPassportDateIssue(new java.util.Date(rs.getDate(prefix + "_date_issue").getTime()));
+        p.setPassportDateExpire(new java.util.Date(rs.getDate(prefix + "_date_expire").getTime()));
+        return p;
+    }
+
+    private PersonChild getChild(ResultSet rs) throws SQLException {
+        PersonChild p = new PersonChild();
+        p.setSurName(rs.getString("c_surname"));
+        p.setGivenName(rs.getString("c_givenname"));
+        p.setPatronymic(rs.getString("c_patronymic"));
+        p.setDateOfBirth(new java.util.Date(rs.getDate("c_date_of_birth").getTime()));
+        p.setBirthDocument(rs.getString("c_birth_document"));
+        return p;
     }
 
 }
