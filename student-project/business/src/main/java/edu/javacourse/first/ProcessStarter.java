@@ -25,7 +25,7 @@ public class ProcessStarter {
 //        t.addStudentOrder();
     }
 
-    private void addStudentOrder() {
+    public void addStudentOrder(StudentOrder stOr) {
         StudentOrder so = StudentOrderUtil.createStudentOrder();
         StudentOrderDataSource ds = FactoryDataSource.getDataSource();
         ds.addStudentOrder(so);

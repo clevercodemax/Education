@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="business" />
         <module name="common-types" />
+        <module name="web-ui" />
       </profile>
     </annotationProcessing>
   </component>

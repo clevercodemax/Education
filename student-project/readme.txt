@@ -17,8 +17,6 @@ String name, curator, spec;
 String sql =
 INSERT INTO st_group (groupName, curator, speciality) Values ()
 
-Поговорим про соединение на Java
-
 INSERT INTO so_student_order (
 student_order_date,
 h_surname, h_givenname, h_patronymic, h_date_of_birth,
@@ -37,9 +35,35 @@ TIME
 TIMESTAMP
 DATETIME - дата/время без часового пояса
 
-Transaction
-commit
-rollback
+Transaction (commit/rollback)
 
-Блокировки
-Изоляция
+1. Создать приложение web c определенной структурой каталогов
+2. Собрать все в архив - .war (Web Archive)
+3. Установить web-приложение на web-server
+
+API - Application Programming Interface
+
+GET /start HTTP/1.1
+Host:
+Content-type: html
+
+1. Web-Server преобразует текст в набор объектов
+2. Web-Server должен найти Web-компонент
+3. Web-Server передает управление web-компоненту
+
+Виды компонентов
+1. Servlet - class HttpServlet
+LifeCycle:
+- init
+- service
+- destroy
+
+Как найти компонент
+1. ContextRoot (ContextPath) - строка под которой регистрируется приложение
+2. url-pattern
+
+
+1. web.xml - класс <-> url-pattern
+2.
+
+http://localhost:8080/web-ui-1.0/simple
