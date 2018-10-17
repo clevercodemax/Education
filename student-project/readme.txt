@@ -43,7 +43,7 @@ Transaction (commit/rollback)
 
 API - Application Programming Interface
 
-GET /start HTTP/1.1
+GET /web-ui-1.0/simple?name1=value1&name1=value2 HTTP/1.1
 Host:
 Content-type: html
 
@@ -64,6 +64,11 @@ LifeCycle:
 
 
 1. web.xml - класс <-> url-pattern
-2.
+2. аннотация
+
 
 http://localhost:8080/web-ui-1.0/simple
+http://localhost:8080/web-ui-1.0/simple?name=Anton - с параметром
+
+
+MVC - Model, View, Controller

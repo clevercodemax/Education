@@ -21,14 +21,19 @@ public class ProcessStarter {
     public static void main(String[] args) {
 
         ProcessStarter t = new ProcessStarter();
-        t.processList();
+//        t.processList();
 //        t.addStudentOrder();
     }
 
     public void addStudentOrder(StudentOrder stOr) {
         StudentOrder so = StudentOrderUtil.createStudentOrder();
         StudentOrderDataSource ds = FactoryDataSource.getDataSource();
-        ds.addStudentOrder(so);
+//        ds.addStudentOrder(so);
+    }
+
+    public List<StudentOrder> findStudentOrders(StudentOrderFilter sof) {
+        StudentOrderDataSource ds = FactoryDataSource.getDataSource();
+        return ds.getStudentOrders();
     }
 
     public void processList() {
@@ -40,8 +45,7 @@ public class ProcessStarter {
         List<StudentOrder> orderList = ds.getStudentOrders();
 
         for (StudentOrder so : orderList) {
-            System.out.println(so.getStudentOrderId() + ":" + so.getChildren().size());
-//            processStudentOrder(so);
+            processStudentOrder(so);
         }
 
     }

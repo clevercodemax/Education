@@ -20,9 +20,14 @@ public class SimpleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setCharacterEncoding("utf-8");
+        String name = req.getParameter("name");
+
         resp.setContentType("text/html");
-        resp.getWriter().append("<strong>Hello Maxim!</strong>");
-//        super.doGet(req, resp);
+        resp.setCharacterEncoding("utf-8");
+
+        resp.getWriter().append("<strong>Hello, " + name + "</strong>");
     }
 
 }
