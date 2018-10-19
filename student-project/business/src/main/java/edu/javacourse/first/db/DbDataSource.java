@@ -126,6 +126,7 @@ public class DbDataSource implements StudentOrderDataSource {
                     if (id != soId) {
                         so = new StudentOrder();
                         so.setStudentOrderId(new Long(id));
+                        so.setStudentOrderDate(new java.util.Date(rs.getDate("student_order_date").getTime()));
                         PersonAdult h = getAdult(rs, "h");
                         PersonAdult w = getAdult(rs, "w");
                         so.setHusband(h);
