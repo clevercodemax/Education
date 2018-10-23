@@ -21,8 +21,8 @@ public class FindSoServlet extends HttpServlet {
 
         req.setAttribute("ORDER_LIST", sos);
 
-        getServletContext().getRequestDispatcher("/find.jsp").forward(req, resp);
-//        getServletContext().getRequestDispatcher("/find_jstl.jsp").forward(req, resp);
+//        getServletContext().getRequestDispatcher("/find.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/find_jstl.jsp").forward(req, resp);
 
     }
 }

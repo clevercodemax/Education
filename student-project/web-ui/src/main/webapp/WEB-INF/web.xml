@@ -2,6 +2,17 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1" xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd">
 
+    <filter>
+        <filter-name>SimpleFilter</filter-name>
+        <filter-class>edu.javacourse.first.web.SimpleFilter</filter-class>
+    </filter>
+
+    <!-- Для установки порядка работы фильтров используется порядок mapping -->
+    <filter-mapping>
+        <filter-name>SimpleFilter</filter-name>
+        <url-pattern>/t*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>SimpleServlet</servlet-name>
         <servlet-class>edu.javacourse.first.web.SimpleServlet</servlet-class>
@@ -13,9 +24,7 @@
     </servlet-mapping>
 
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 
     <welcome-file-list>

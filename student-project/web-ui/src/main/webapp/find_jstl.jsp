@@ -17,14 +17,20 @@
                     <th>#</th>
                     <th>Date</th>
                     <th>Husband SurName</th>
+                    <th>URL</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="sOrder" items="${ORDER_LIST}">
+                    <c:url var="orderUrl" value="GoTo">
+                        <c:param name="orderId" value="${sOrder.studentOrderId}"/>
+                        <c:param name="orderDate" value="${sOrder.studentOrderDate}"/>
+                    </c:url>
                     <tr>
                         <th>${sOrder.studentOrderId}</th>
                         <th>${sOrder.studentOrderDate}</th>
                         <th>${sOrder.husband.surName}</th>
+                        <th><a href="${orderUrl}">URL</a></th>
                     </tr>
                 </c:forEach>
             <t/body>

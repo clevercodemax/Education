@@ -55,8 +55,6 @@ http://localhost:8080/
 2. Custom Tag - Tag Library <tag> - <class> & Custom Tags
 3. Expression Language
 
-<table border="2">
-
 startTag
 out.println ("<h1>")
 endTag
@@ -67,3 +65,11 @@ JSTL - Java Standard Tag Library (необходимо jstl-1.2.jar добави
 2. International
 3. XML
 4. SQL - JDBC ???
+
+http://localhost:8080/web-ui-1.0/GoTo?orderId=6&orderDate=Tue+Oct+09+00%3a00%3a00+GMT%2b06%3a00+2018
+
+http://localhost:8080/web-ui-1.0/one?Name=SpiderMan
+
+1. Не использовать сессии просто так, а также анонимные сессии
+2. Минимизируйте время сессии
+3. Объекты в сессии должны быть Serializable
